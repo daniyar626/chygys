@@ -1,0 +1,42 @@
+name: Deploy demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Assemble static demo
+        run: |
+          mkdir _site
+          cp -r public/. _site/
+          cp -r demo _site/demo
+          # Switch the frontend to the read-only demo data in demo/
+          sed -i 's|<head>|<head>\n  <script>window.CQA_STATIC = true;</script>|' _site/index.html
+          grep -q 'CQA_STATIC' _site/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -49,7 +49,7 @@ function shell() {
         </select>
       </label>
     </header>
-    ${state.meta && !state.meta.has_key ? raw('<div class="cqa-banner">Не задан ключ модели (GEMINI_API_KEY или ANTHROPIC_API_KEY) — оценка недоступна. Добавьте ключ в файл .env и перезапустите сервер.</div>') : ''}
+    ${state.meta?.demo ? raw('<div class="cqa-banner">Демо-версия: показаны готовые оценки модели. Запуск оценки, загрузка диалогов, апелляции и правка чек-листов здесь отключены.</div>') : state.meta && !state.meta.has_key ? raw('<div class="cqa-banner">Не задан ключ модели (GEMINI_API_KEY или ANTHROPIC_API_KEY) — оценка недоступна. Добавьте ключ в файл .env и перезапустите сервер.</div>') : ''}
     <main id="cqa-main" class="cqa-main"></main>
     <footer class="cqa-footer">
       <div class="cqa-footer-inner">

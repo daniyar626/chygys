@@ -26,6 +26,7 @@ export async function renderCard(el, id, evaluationId = null) {
   }
   ctx = { el, conv, views, evalKey, view: evalKey || (conv.asr ? 'asr' : 'original') };
   const isCall = conv.has_audio;
+  const audioSrc = isCall ? api.audioUrl(conv.conversation_id) : null;
 
   el.innerHTML = html`
     <div class="cqa-card-head">
@@ -52,9 +53,11 @@ export async function renderCard(el, id, evaluationId = null) {
       <section class="cqa-pane cqa-pane--transcript">
         ${isCall
           ? raw(html`<div class="cqa-player">
-              <audio id="audio" controls preload="none" src="${api.audioUrl(conv.conversation_id)}"></audio>
+              ${audioSrc
+                ? raw(html`<audio id="audio" controls preload="none" src="${audioSrc}"></audio>`)
+                : raw('<div class="cqa-muted">Запись звонка в демо-версии недоступна — показан её транскрипт.</div>')}
               <div class="cqa-row">
-                <a href="${api.audioUrl(conv.conversation_id)}" target="_blank" rel="noopener">Открыть запись в новой вкладке</a>
+                ${audioSrc ? raw(html`<a href="${audioSrc}" target="_blank" rel="noopener">Открыть запись в новой вкладке</a>`) : ''}
                 <div class="cqa-spacer"></div>
                 <button id="asr" class="cqa-btn cqa-btn--sm">${conv.asr ? 'Распознать заново' : 'Распознать запись (Gemini)'}</button>
               </div>
@@ -150,7 +153,7 @@ function drawTranscript() {
   el.querySelector('#transcript').innerHTML = note + current.transcript.map((m) => html`
     <div class="cqa-msg cqa-msg--${m.speaker}" id="cqa-m-${m.idx}" data-idx="${m.idx}" data-t="${m.t ?? ''}">
       <div class="cqa-msg-meta"><span class="cqa-idx">[${m.idx}]</span> ${speakerLabel[m.speaker] || m.speaker} · ${shortTs(m.timestamp)}${m.language ? raw(` · <span class="cqa-lang">${esc(m.language)}</span>`) : ''}</div>
-      ${conv.has_audio && m.t != null ? raw(html`<button class="cqa-time" data-seek="${m.t}" title="Перейти к этому месту записи и воспроизвести">▶ ${fmtSec(m.t)}</button>`) : ''}
+      ${conv.has_audio && m.t != null && api.audioUrl(conv.conversation_id) ? raw(html`<button class="cqa-time" data-seek="${m.t}" title="Перейти к этому месту записи и воспроизвести">▶ ${fmtSec(m.t)}</button>`) : ''}
       <div class="cqa-msg-text">${m.text}</div>
     </div>`).join('');
 }

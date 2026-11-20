@@ -9,7 +9,8 @@
     "start": "node --env-file-if-exists=.env server/index.js",
     "dev": "node --watch --env-file-if-exists=.env server/index.js",
     "test": "node --test test/",
-    "export": "node --env-file-if-exists=.env scripts/export-results.js"
+    "export": "node --env-file-if-exists=.env scripts/export-results.js",
+    "demo": "node scripts/build-demo.js"
   },
   "engines": {
     "node": ">=22"
