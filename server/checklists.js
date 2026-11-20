@@ -3,8 +3,8 @@ import path from 'node:path';
 import * as store from './store.js';
 
 const COL = 'checklists';
-const SHIPPED_KEY = 'freedom';
-const RETIRED_KEYS = ['default'];
+const SHIPPED_KEY = 'quality';
+const RETIRED_KEYS = ['default', 'freedom'];
 
 const err = (msg) => Object.assign(new Error(msg), { status: 400 });
 

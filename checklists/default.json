@@ -1,6 +1,6 @@
 {
-  "id": "freedom",
-  "name": "Чек-лист качества чатов (Freedom Broker)",
+  "id": "quality",
+  "name": "Чек-лист качества чатов",
   "version": 1,
   "rounding": { "decimals": 2 },
   "critical_policy": "flag",
