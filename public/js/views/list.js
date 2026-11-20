@@ -13,16 +13,16 @@ export async function renderList(el) {
     <section class="cqa-hero">
       <div>
         <div class="cqa-sets" role="tablist" aria-label="Набор диалогов">
-          ${groups.map((g) => raw(html`<button class="cqa-set ${g === state.group ? 'is-active' : ''}" data-set="${g}" role="tab">${g === 'DEV' ? 'DEV · разработка' : g === 'FBroker' ? 'FBroker · контрольный' : g === 'UPLOADS' ? 'Мои загрузки' : g}</button>`))}
+          ${groups.map((g) => raw(html`<button class="cqa-set ${g === state.group ? 'is-active' : ''}" data-set="${g}" role="tab">${g === 'DEV' ? 'DEV · разработка' : g === 'FBroker' ? 'Контрольный набор' : g === 'UPLOADS' ? 'Мои загрузки' : g}</button>`))}
         </div>
-        <div class="cqa-eyebrow">Контроль качества · Freedom Broker</div>
+        <div class="cqa-eyebrow">Контроль качества диалогов</div>
         <h1>Каждый диалог.<br><em>Понятная оценка.</em></h1>
         <p>Чаты и звонки на русском, казахском и английском оцениваются по чек-листу организаторов: баллы, обоснование и реплика-доказательство по каждому критерию.</p>
       </div>
       <div class="cqa-kpis">
         <div class="cqa-kpi"><span>Диалогов в наборе ${state.group}</span><b id="kpi-total">—</b></div>
         <div class="cqa-kpi"><span>Оценено</span><b id="kpi-scored">—</b></div>
-        <div class="cqa-kpi"><span>Средний балл</span><b class="is-green" id="kpi-avg">—</b></div>
+        <div class="cqa-kpi"><span>Средний балл</span><b class="is-good" id="kpi-avg">—</b></div>
         <div class="cqa-kpi"><span>Грубые ошибки</span><b class="is-red" id="kpi-crit">—</b></div>
       </div>
     </section>

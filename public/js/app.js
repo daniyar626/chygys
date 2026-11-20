@@ -32,9 +32,9 @@ function shell() {
   root.innerHTML = html`
     <header class="cqa-header">
       <a class="cqa-brand" href="#/" style="text-decoration:none">
-        <img class="cqa-logo" src="img/freedom-logo.png" alt="Freedom Broker" width="34" height="34">
-        <span class="cqa-wordmark"><b>freedom</b><small>broker</small></span>
-        <span class="cqa-product"><b>CQA</b> · оценка качества диалогов</span>
+        <img class="cqa-logo" src="img/logo.svg" alt="" width="32" height="32">
+        <span class="cqa-wordmark"><b>Chygys</b><small>CQA</small></span>
+        <span class="cqa-product">Оценка качества диалогов</span>
       </a>
       <nav class="cqa-nav">
         <a href="#/" class="${tab === 'list' ? 'is-active' : ''}">Диалоги</a>
@@ -53,10 +53,10 @@ function shell() {
     <main id="cqa-main" class="cqa-main"></main>
     <footer class="cqa-footer">
       <div class="cqa-footer-inner">
-        <img class="cqa-logo" src="img/freedom-logo.png" alt="Freedom Broker" width="34" height="34">
-        <span><b>Freedom Broker · CQA</b> — прототип оценки качества диалогов операторов</span>
+        <img class="cqa-logo" src="img/logo.svg" alt="" width="26" height="26">
+        <span><b>Chygys · CQA</b> — прототип оценки качества диалогов операторов</span>
         <span class="cqa-spacer"></span>
-        <span>Оценка по «Чек-листу качества чатов» · RU · KZ · EN</span>
+        <span>Оценка по чек-листу качества · RU · KZ · EN</span>
       </div>
     </footer>`;
   root.querySelector('#cqa-role').addEventListener('change', (e) => {
